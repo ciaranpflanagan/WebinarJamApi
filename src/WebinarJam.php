@@ -1,10 +1,10 @@
 <?php
 
-namespace ciaranpflanagan\WebinarJam;
+namespace ciaranpflanagan\WebinarJamApi;
 
 use Exception;
 
-class LiveStreamService {
+class WebinarJam {
 
     protected $api_key;
 

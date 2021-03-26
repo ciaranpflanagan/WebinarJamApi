@@ -1,0 +1,10 @@
+{
+    "name": "ciaranpflanagan/webinarjam-api",
+    "description": "WebinarJam API Wrapper",
+    "autoload": {
+        "psr-4": {
+            "ciaranpflanagan\\WebinarJamApi\\": "/src"
+        }
+    },
+    "minimum-stability": "dev"
+}

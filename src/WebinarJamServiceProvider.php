@@ -1,6 +1,6 @@
 <?php
 
-namespace ciaranpflanagan\WebinarJam;
+namespace ciaranpflanagan\WebinarJamApi;
 
 use Illuminate\Support\ServiceProvider;
 
