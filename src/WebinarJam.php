@@ -66,7 +66,7 @@ class WebinarJam {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
             $output = json_decode(curl_exec($ch), true);
-            $this->webinar = $output['webinar'];
+            if ($output['status'] !== 'error') $this->webinar = $output['webinar'];
 
             return $output;
         } catch (\Exception $e) {
