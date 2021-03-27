@@ -7,6 +7,7 @@ use Exception;
 class WebinarJam {
 
     protected $api_key;
+    protected $webinar;
 
     public function __construct(string $key) {
         $this->api_key = $key;
@@ -64,7 +65,10 @@ class WebinarJam {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
-            return json_decode(curl_exec($ch), true);
+            $output = json_decode(curl_exec($ch), true);
+            $this->webinar = $output['webinar'];
+
+            return $output;
         } catch (\Exception $e) {
 
             throw new Exception($e->getMessage(), 1);
@@ -117,6 +121,25 @@ class WebinarJam {
         } catch (\Exception $e) {
 
             throw new Exception($e->getMessage(), 1);
+        }
+    }
+
+    /**
+     * Returns the webinar schedule
+     *
+     * @param integer $webinar_id
+     *
+     * @return array
+     */
+    public function webinarSchedule (int $webinar_id = null) :array {
+        if ($webinar_id !== null) {
+            // Get schedule from webinar details
+            $webinar = (new self($this->api_key))->webinarDetails($webinar_id);
+
+            return $webinar['webinar']['schedules'];
+        } else {
+            // Check stored webinar
+            return (isset($this->webinar)) ? $this->webinar['schedules'] : array() ;
         }
     }
 }
