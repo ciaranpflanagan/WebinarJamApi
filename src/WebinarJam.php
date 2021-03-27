@@ -9,6 +9,13 @@ class WebinarJam {
     protected $api_key;
     protected $webinar;
 
+    /**
+     * Class constructor
+     *
+     * @param string $key
+     *
+     * @return void
+     */
     public function __construct(string $key) {
         $this->api_key = $key;
     }
@@ -45,6 +52,8 @@ class WebinarJam {
     /**
      * Returns details about one individual webinar
      *
+     * @param int $webinar_id
+     *
      * @return mixed
      */
     public function webinarDetails (int $webinar_id) {
@@ -78,31 +87,25 @@ class WebinarJam {
     /**
      * Registers a person to a webinar
      *
+     * @param int $webinar_id
+     * @param array $details
+     *
      * @return mixed
      */
-    public function register (
-        int $webinar_id,
-        string $first_name,
-        string $last_name = null,
-        string $email,
-        int $schedule,
-        string $ip_address = null,
-        string $phone_country_code = null,
-        string $phone = null
-    ) {
+    public function register (int $webinar_id, array $details) {
         $fields['api_key'] = $this->api_key;
         
         // Required fields
         $fields['webinar_id'] = $webinar_id;
-        $fields['first_name'] = $first_name;
-        $fields['email'] = $email;
-        $fields['schedule'] = $schedule;
+        $fields['first_name'] = $details['first_name'];
+        $fields['email'] = $details['email'];
+        $fields['schedule'] = $details['schedule'];
 
         // Optional fields
-        if ($last_name !== null) $fields['last_name'] = $last_name;
-        if ($ip_address !== null) $fields['ip_address'] = $ip_address;
-        if ($phone_country_code !== null) $fields['phone_country_code'] = $phone_country_code;
-        if ($phone !== null) $fields['phone'] = $phone;
+        if (!empty($details['last_name'])) $fields['last_name'] = $details['last_name'];
+        if (!empty($details['ip_address'])) $fields['ip_address'] = $details['ip_address'];
+        if (!empty($details['phone_country_code'])) $fields['phone_country_code'] = $details['phone_country_code'];
+        if (!empty($details['phone'])) $fields['phone'] = $details['phone'];
 
         $fields_string  = http_build_query($fields);
 
