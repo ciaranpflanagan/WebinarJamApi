@@ -110,7 +110,7 @@ class WebinarJam {
         $fields_string  = http_build_query($fields);
 
         try {
-            $ch = curl_init('https://api.webinarjam.com/webinarjam/webinar');
+            $ch = curl_init('https://api.webinarjam.com/webinarjam/register');
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_POST, count($fields));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
